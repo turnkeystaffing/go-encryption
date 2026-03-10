@@ -156,7 +156,7 @@ func ValidateProviderConfig(cfg EncryptionProviderConfig) error {
 		_, err := BuildLocalKMSConfig(cfg.LocalKMS)
 		return err
 
-	case "none", "":
+	case "none":
 		return nil
 
 	default:

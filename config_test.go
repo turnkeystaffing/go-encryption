@@ -160,7 +160,12 @@ func TestValidateProviderConfig_Local_BadKeys(t *testing.T) {
 
 func TestValidateProviderConfig_None(t *testing.T) {
 	assert.NoError(t, ValidateProviderConfig(EncryptionProviderConfig{Provider: "none"}))
-	assert.NoError(t, ValidateProviderConfig(EncryptionProviderConfig{Provider: ""}))
+}
+
+func TestValidateProviderConfig_EmptyIsInvalid(t *testing.T) {
+	err := ValidateProviderConfig(EncryptionProviderConfig{Provider: ""})
+	require.Error(t, err)
+	assert.Contains(t, err.Error(), "unknown provider")
 }
 
 func TestValidateProviderConfig_Unknown(t *testing.T) {
